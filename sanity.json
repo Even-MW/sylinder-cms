@@ -1,0 +1,56 @@
+{
+  "root": true,
+  "project": {
+    "name": "SylinderCMS"
+  },
+  "api": {
+    "projectId": "",
+    "dataset": "unil"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "@sanity/vision"
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schemas/schema"
+    }
+  ],
+  "__experimental_spaces": [
+    {
+      "name": "unil",
+      "title": "Unil",
+      "default": true,
+      "api": {
+        "projectId": "clrua9n3",
+        "dataset": "unil"
+      }
+    },
+    {
+      "name": "eldorado",
+      "title": "Eldorado",
+      "api": {
+        "projectId": "clrua9n3",
+        "dataset": "eldorado"
+      }
+    },
+    {
+      "name": "Fristprice",
+      "title": "Firstprice",
+      "api": {
+        "projectId": "clrua9n3",
+        "dataset": "firstprice"
+      }
+    }
+  ]
+}
