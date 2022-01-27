@@ -4,14 +4,19 @@
     "name": "SylinderCMS"
   },
   "api": {
-    "projectId": "",
+    "projectId": "clrua9n3",
     "dataset": "unil"
   },
   "plugins": [
     "@sanity/base",
     "@sanity/default-layout",
     "@sanity/default-login",
-    "@sanity/desk-tool"
+    "@sanity/desk-tool",
+    "@sanity/production-preview",
+    "iframe-pane",
+    "seo-pane",
+    "media",
+    "asset-source-unsplash"
   ],
   "env": {
     "development": {
@@ -24,33 +29,14 @@
     {
       "name": "part:@sanity/base/schema",
       "path": "./schemas/schema"
-    }
-  ],
-  "__experimental_spaces": [
-    {
-      "name": "unil",
-      "title": "Unil",
-      "default": true,
-      "api": {
-        "projectId": "clrua9n3",
-        "dataset": "unil"
-      }
     },
     {
-      "name": "eldorado",
-      "title": "Eldorado",
-      "api": {
-        "projectId": "clrua9n3",
-        "dataset": "eldorado"
-      }
+      "name": "part:@sanity/desk-tool/structure",
+      "path": "./deskStructure.js"
     },
     {
-      "name": "Fristprice",
-      "title": "Firstprice",
-      "api": {
-        "projectId": "clrua9n3",
-        "dataset": "firstprice"
-      }
+      "implements": "part:@sanity/production-preview/resolve-production-url",
+      "path": "./resolveProductionUrl.js"
     }
   ]
 }
