@@ -14,10 +14,12 @@ const ListPreview = ({ value }) => {
 
     return <div style={{ display: "flex" }}>
         {list.map(item =>
-            <div style={{ display: "flex", marginLeft: "8px", border: value[`listitem${item}b`] ? "1px solid lightgray" : "", borderRadius: "5px", padding: "4px" }}>
-                {value[`listitem${item}b`] && <img src={urlFor(value[`listitem${item}b`]).width(50).url()} />}
+            <div style={{ display: "flex", marginLeft: "8px", border: value?.[`listitem${item}b`] ? "1px solid lightgray" : "", borderRadius: "5px", padding: "4px", alignItems: "center", height: "40px" }}>
+                <div style={{ width: "35px", height: "35px" }}>
+                    {value?.[`listitem${item}b`] && <img src={urlFor(value?.[`listitem${item}b`]).width(50).url()} style={{ width: "35px", height: "35px" }} />}
+                </div>
                 <p style={{ marginLeft: "4px" }}>
-                    {value[`listitem${item}a`] && value[`listitem${item}a`]}
+                    {value?.[`listitem${item}a`] && value[`listitem${item}a`]}
                 </p>
             </div>
         )}

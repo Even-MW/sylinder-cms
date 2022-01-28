@@ -7,6 +7,7 @@ import {
 } from 'next-sanity'
 
 import { config } from './config'
+import { serializers } from './serializers'
 
 export const urlFor = (source) => createImageUrlBuilder(config).image(source)
 
@@ -17,7 +18,7 @@ export const usePreviewSubscription = createPreviewSubscriptionHook(config)
 export const PortableText = createPortableTextComponent({
     ...config,
     // (https://github.com/sanity-io/block-content-to-react)
-    serializers: {},
+    serializers: serializers,
 })
 
 export const sanityClient = createClient(config)

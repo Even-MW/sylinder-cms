@@ -1,13 +1,13 @@
+import { MdTapas, MdWeb } from 'react-icons/md'
+
 import Iframe from "sanity-plugin-iframe-pane";
-import { MdWeb } from 'react-icons/md'
 import S from '@sanity/desk-tool/structure-builder'
-import SeoPane from "sanity-plugin-seo-pane";
 import resolveProductionUrl from "./resolveProductionUrl";
 
 // We filter document types defined in structure to prevent
 // them from being listed twice
 const hiddenDocTypes = (listItem) =>
-    !["pageBuilder", "media.tag"].includes(listItem.getId());
+    !["pageBuilder", "media.tag", "ingredient"].includes(listItem.getId());
 
 export const getDefaultDocumentNode = () => {
     // Return all documents with just 1 view: the form
@@ -16,7 +16,6 @@ export const getDefaultDocumentNode = () => {
         S.view
             .component(Iframe)
             .options({
-                // Accepts an async function
                 url: (doc) => resolveProductionUrl(doc),
             })
             .title("Preview"),
@@ -33,10 +32,16 @@ export default () =>
                     .child(
                         S.documentTypeList('pageBuilder')
                             .title('Sider')
-                            .child(),
                     ),
                 S.divider(),
-                ...S.documentTypeListItems().filter(hiddenDocTypes)
-
+                ...S.documentTypeListItems().filter(hiddenDocTypes),
+                S.divider(),
+                S.listItem()
+                    .title('Ingredienser')
+                    .icon(MdTapas)
+                    .child(
+                        S.documentTypeList('ingredient')
+                            .title('Ingredienser')
+                    ),
             ]
         )

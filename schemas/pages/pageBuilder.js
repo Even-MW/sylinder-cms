@@ -7,6 +7,14 @@ export const pageBuilder = {
     icon: MdWeb,
     fields: [
         {
+            name: "headerImage",
+            type: "image",
+            title: "Hovedbilde",
+            options: {
+                hotspot: true
+            }
+        },
+        {
             name: "title",
             type: "string",
             title: "Tittel"

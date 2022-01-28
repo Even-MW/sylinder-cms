@@ -1,34 +1,17 @@
-import { sanityClient, urlFor } from '../lib/sanity'
+import { PortableText, sanityClient, urlFor } from '../lib/sanity'
 
-import BlockContent from "@sanity/block-content-to-react"
+// import BlockContent from "@sanity/block-content-to-react"
 import Head from 'next/head'
 import Link from "next/link"
 import YouTube from "react-youtube"
 import getYouTubeID from "get-youtube-id"
 import styles from '../styles/Home.module.css'
 
-const pageQuery = `*[_type == "pageBuilder"] {title, slug, pageContent}`
-const recipeQuery = `*[_type == "recipe"]`
+const pageQuery = `*[_type == "pageBuilder"] {_id, title, slug}`
+const recipeQuery = `*[_type == "recipe"]{_id, title, slug, recipeImage}`
+const articleQuery = `*[_type == "article"]{_id, title, slug}`
 
-const serializers = {
-  types: {
-    articleBlock: (props) => (
-      <pre>{JSON.stringify(props, null, 2)}</pre>
-    ),
-    recipeBlock: (props) => (
-      <pre>{JSON.stringify(props, null, 2)}</pre>
-    ),
-    youtubeEmbed: ({ node: { url } }) => {
-      const id = getYouTubeID(url)
-      return (
-        <YouTube videoId={id} />)
-    }
-
-  },
-}
-
-export default function Home({ page, recipes }) {
-  const singelPage = page[0]
+export default function Home({ pages, recipes, articles }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -37,6 +20,19 @@ export default function Home({ page, recipes }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <h2>Pages:</h2>
+        <ul className={styles.grid}>
+          {pages?.length > 0 && pages.map((page) => (
+            <li key={page._id} className={styles.card}>
+              <Link href={`/pageBuilder/${page.slug.current}`}>
+                <a>
+                  <span>{page.title}</span>
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <h2>Recipes: </h2>
         <ul className={styles.grid}>
           {recipes?.length > 0 && recipes.map((recipe) => (
             <li key={recipe._id} className={styles.card}>
@@ -49,27 +45,33 @@ export default function Home({ page, recipes }) {
             </li>
           ))}
         </ul>
-        <h2>{singelPage.title}</h2>
-        <p>{singelPage.slug.current}</p>
-        <BlockContent
-          blocks={singelPage.pageContent}
-          serializers={serializers}
-          imageOptions={{ w: 320, h: 240, fit: 'max' }}
-          {...sanityClient.config()}
-        />
+        <h2>Articles:</h2>
+        <ul className={styles.grid}>
+          {articles?.length > 0 && articles.map((article) => (
+            <li key={article._id} className={styles.card}>
+              <Link href={`/article/${article.slug.current}`}>
+                <a>
+                  <span>{article.title}</span>
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </main >
     </div >
   )
 }
 
 export async function getStaticProps() {
-  const page = await sanityClient.fetch(pageQuery)
+  const pages = await sanityClient.fetch(pageQuery)
   const recipes = await sanityClient.fetch(recipeQuery)
+  const articles = await sanityClient.fetch(articleQuery)
 
   return {
     props: {
-      page,
-      recipes
+      pages,
+      recipes,
+      articles,
     }
   }
 }
