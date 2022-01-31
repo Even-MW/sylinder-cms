@@ -9,8 +9,6 @@ export default function preview(req, res) {
         return res.status(401).json({ message: 'Invalid secret token' })
     }
 
-    console.log(req)
-
     if (!req.query.slug) {
         return res.status(401).json({ message: 'No slug' })
     }
