@@ -27,14 +27,14 @@ const recipeQuery = `*[_type == "recipe" && slug.current == $slug][0]{
     likes
 }`
 
-export default function Recipe({ data, preview }) {
-    // const { data: recipe } = usePreviewSubscription(recipeQuery, {
-    //     params: { slug: data.recipe.slug.current },
-    //     initialData: data,
-    //     enabled: preview,
-    // })
+const path = "recipe"
 
-    const { recipe } = data
+export default function Recipe({ data, preview }) {
+    const { data: recipe } = usePreviewSubscription(recipeQuery, {
+        params: { slug: data?.recipe?.slug?.current, subpath: path },
+        initialData: data,
+        enabled: preview,
+    })
 
     const [likes, setLikes] = useState(data?.recipe?.likes)
 
@@ -50,7 +50,7 @@ export default function Recipe({ data, preview }) {
 
     return (
         <article className={styles.card}>
-            <h1>{recipe.title}</h1>
+            <h1>{recipe?.title}</h1>
             <button onClick={addLike}>
                 {likes} 💛
             </button>
@@ -58,7 +58,7 @@ export default function Recipe({ data, preview }) {
                 <img className={styles.image} src={urlFor(recipe?.recipeImage).url()} />
                 <div>
                     <ul>
-                        {recipe.ingredients?.map((ingredient) => (
+                        {recipe?.ingredients?.map((ingredient) => (
                             <li key={ingredient._key}>
                                 {ingredient?.wholeNumber}
                                 {ingredient?.fraction}
@@ -69,7 +69,7 @@ export default function Recipe({ data, preview }) {
                             </li>
                         ))}
                     </ul>
-                    <PortableText blocks={recipe?.instructions} />
+                    {recipe?.instructions && <PortableText blocks={recipe?.instructions} />}
                 </div>
             </main>
 
@@ -78,17 +78,12 @@ export default function Recipe({ data, preview }) {
 }
 
 export async function getStaticPaths() {
-    const paths = await sanityClient.fetch(
-        `*[_type == "recipe" && defined(slug.current)]{
-            "params": {
-                "slug": slug.current
-            }
-        }`
-    )
+    const allSlugsQuery = `[*[defined(slug.current)][].slug.current]`
+    const pages = await sanityClient.fetch(allSlugsQuery)
 
     return {
-        paths,
-        fallback: false,
+        paths: pages.map((slug) => `/${path}/${slug}`),
+        fallback: true,
     }
 }
 

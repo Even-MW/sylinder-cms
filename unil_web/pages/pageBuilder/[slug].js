@@ -25,21 +25,21 @@ const pageBuilderQuery = `*[_type == "pageBuilder" && slug.current == $slug][0]{
     }
 }`
 
-export default function PageBuilder({ data, preview }) {
-    // const { data: page } = usePreviewSubscription(pageBuilderQuery, {
-    //     params: { slug: data.page.slug.current },
-    //     initialData: data,
-    //     enabled: preview
-    // })
+const path = "pageBuilder"
 
-    const { page } = data;
+export default function PageBuilder({ data, preview }) {
+    const { data: page } = usePreviewSubscription(pageBuilderQuery, {
+        params: { slug: data?.page?.slug?.current, subpath: path },
+        initialData: data,
+        enabled: preview
+    })
 
     return (
         <article>
-            <img src={urlFor(page?.headerImage).url()} alt={page.title} />
-            <h1>{page.title}</h1>
+            <img src={urlFor(page?.headerImage).url()} alt={page?.title} />
+            <h1>{page?.title}</h1>
             <main>
-                <PortableText blocks={page.pageContent} />
+                {page?.pageContent && <PortableText blocks={page.pageContent} />}
             </main>
         </article>
     )
@@ -48,15 +48,12 @@ export default function PageBuilder({ data, preview }) {
 }
 
 export async function getStaticPaths() {
-    const paths = await sanityClient.fetch(`*[_type == "pageBuilder" && defined(slug.current)]{
-        "params": {
-            "slug": slug.current
-        }
-    }`)
+    const allSlugsQuery = `[*[defined(slug.current)][].slug.current]`
+    const pages = await sanityClient.fetch(allSlugsQuery)
 
     return {
-        paths,
-        fallback: false
+        paths: pages.map((slug) => `/${path}/${slug}`),
+        fallback: true,
     }
 }
 
