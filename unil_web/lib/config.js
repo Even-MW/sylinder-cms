@@ -7,13 +7,14 @@ export const config = {
      *
      * https://nextjs.org/docs/basic-features/environment-variables
      **/
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "unil",
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "clrua9n3",
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     apiVersion: 'v1', // Learn more: https://www.sanity.io/docs/api-versioning
     /**
      * Set useCdn to `false` if your application require the freshest possible
      * data always (potentially slightly slower and a bit more expensive).
      * Authenticated request (like preview) will always bypass the CDN
      **/
-    useCdn: false//process.env.NODE_ENV === 'production',
+    useCdn: false,//process.env.NODE_ENV === 'production',
+    token: process.env.SANITY_WRITE_TOKEN.
 }
