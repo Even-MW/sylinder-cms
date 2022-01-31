@@ -24,7 +24,7 @@ export default function Home({ pages, recipes, articles }) {
         <ul className={styles.grid}>
           {pages?.length > 0 && pages.map((page) => (
             <li key={page._id} className={styles.card}>
-              <Link href={`/pageBuilder/${page.slug.current}`}>
+              <Link href={`/pageBuilder/${page?.slug?.current}`}>
                 <a>
                   <span>{page.title}</span>
                 </a>
@@ -36,7 +36,7 @@ export default function Home({ pages, recipes, articles }) {
         <ul className={styles.grid}>
           {recipes?.length > 0 && recipes.map((recipe) => (
             <li key={recipe._id} className={styles.card}>
-              <Link href={`/recipe/${recipe.slug.current}`}>
+              <Link href={`/recipe/${recipe?.slug?.current}`}>
                 <a>
                   <img src={urlFor(recipe.recipeImage).url()} />
                   <span>{recipe.title}</span>
@@ -49,7 +49,7 @@ export default function Home({ pages, recipes, articles }) {
         <ul className={styles.grid}>
           {articles?.length > 0 && articles.map((article) => (
             <li key={article._id} className={styles.card}>
-              <Link href={`/article/${article.slug.current}`}>
+              <Link href={`/article/${article?.slug?.current}`}>
                 <a>
                   <span>{article.title}</span>
                 </a>
