@@ -29,7 +29,7 @@ const recipeQuery = `*[_type == "recipe" && slug.current == $slug][0]{
 
 export default function Recipe({ data, preview }) {
     const { data: recipe } = usePreviewSubscription(recipeQuery, {
-        params: { slug: data.recipe?.slug?.current },
+        params: { slug: data.recipe.slug.current },
         initialData: data,
         enabled: preview,
     })

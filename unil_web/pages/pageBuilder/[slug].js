@@ -26,11 +26,8 @@ const pageBuilderQuery = `*[_type == "pageBuilder" && slug.current == $slug][0]{
 }`
 
 export default function PageBuilder({ data, preview }) {
-    // const { page } = data
-
-    // console.log(page)
     const { data: page } = usePreviewSubscription(pageBuilderQuery, {
-        params: { slug: data.page?.slug?.current },
+        params: { slug: data.page.slug.current },
         initialData: data,
         enabled: preview
     })
