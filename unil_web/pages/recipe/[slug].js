@@ -28,9 +28,6 @@ const recipeQuery = `*[_type == "recipe" && slug.current == $slug][0]{
 }`
 
 export default function Recipe({ data, preview }) {
-
-    console.log(data)
-
     const { data: recipe } = usePreviewSubscription(recipeQuery, {
         params: { slug: data.recipe?.slug?.current },
         initialData: data,
@@ -89,7 +86,7 @@ export async function getStaticPaths() {
 
     return {
         paths,
-        fallback: true,
+        fallback: false,
     }
 }
 
