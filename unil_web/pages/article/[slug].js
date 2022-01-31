@@ -16,11 +16,13 @@ const articleQuery = `*[_type == "article" && slug.current == $slug][0]{
 
 export default function Article({ data, preview }) {
 
-    const { data: article } = usePreviewSubscription(articleQuery, {
-        params: { slug: data.article.slug.current },
-        initialData: data,
-        enabled: preview,
-    })
+    // const { data: article } = usePreviewSubscription(articleQuery, {
+    //     params: { slug: data.article.slug.current },
+    //     initialData: data,
+    //     enabled: preview,
+    // })
+
+    const { article } = data;
 
     return (
         <article>
