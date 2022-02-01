@@ -1,0 +1,18 @@
+.pagebuilder {
+    display: grid;
+    justify-items: center;
+}
+
+.main {
+    max-width: 900px;
+    background-color: white;
+    padding: 2em;
+    transform: translateY(-10%);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.image {
+    max-height: 300px;
+    width: 100%;
+    object-fit: cover;
+}

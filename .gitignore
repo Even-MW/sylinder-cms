@@ -1,7 +1,6 @@
+/dist
 /node_modules
 /web/node_modules
 /web/.env.local
 /web_bak*
 .env.local
-dist/*
-dist/

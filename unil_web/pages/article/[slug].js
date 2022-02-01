@@ -1,13 +1,31 @@
 import { PortableText, sanityClient, urlFor, usePreviewSubscription } from "../../lib/sanity"
 
 import React from "react"
+import YoutubeBlock from "../../components/youtubeBlock/youtubeBlock"
+import styles from "../../styles/Article.module.css"
 
 const articleQuery = `*[_type == "article" && slug.current == $slug][0]{
     _id,
     title,
     slug,
     mainImage,
-    mainContent,
+    mainContent[]{
+        ...,
+        recipeList[]->{
+            _id,
+            slug,
+            title,
+            recipeImage,
+            likes,
+            timeEstiamte
+        },
+        articleList[]->{
+            _id,
+            slug,
+            title,
+            mainImage
+        },
+    },
     youtubeurl,
     ingress
 }`
@@ -15,27 +33,22 @@ const articleQuery = `*[_type == "article" && slug.current == $slug][0]{
 const path = "article"
 
 export default function Article({ data, preview }) {
-
-    console.log(data)
-
     const { data: article } = usePreviewSubscription(articleQuery, {
         params: { slug: data?.article?.slug?.current, subpath: path },
         initialData: data,
         enabled: preview,
     })
 
-    // const { article } = data;
-
     return (
-        <article>
-            <img src={urlFor(article?.mainImage?.image).url()} />
-            <h1>{article?.title}</h1>
-            <p>{article?.ingress}</p>
-            <br />
-            <main style={{ border: "1px solid rgba(0, 0, 0, .2)", padding: "1em" }}>
+        <article className={styles.article}>
+            <img className={styles.image} src={urlFor(article?.mainImage?.image).url()} alt={article?.mainImage?.alt} />
+            <main className={styles.main}>
+                <h1 className={styles.heading}>{article?.title}</h1>
+                {article.ingress && <p className={styles.ingress}>{article?.ingress}</p>}
+                <br />
                 {article?.mainContent && <PortableText blocks={article?.mainContent} />}
+                {article?.youtubeurl && <YoutubeBlock url={article?.youtubeurl} />}
             </main>
-
         </article>
     )
 }

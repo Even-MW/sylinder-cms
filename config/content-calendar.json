@@ -1,0 +1,9 @@
+{
+  "types": [
+    {
+      "type": "article",
+      "field": "publishedAt"
+    }
+  ],
+  "filterWarnings": [{}]
+}

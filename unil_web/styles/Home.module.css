@@ -128,6 +128,7 @@
 
 .underline {
   text-decoration: underline;
+  padding-left: 1em;
 }
 
 .image {

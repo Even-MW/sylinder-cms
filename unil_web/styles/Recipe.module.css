@@ -1,8 +1,67 @@
 .image {
-    height: 300px;
+    margin: 0 1em 1em 0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-.card {
-    margin-left: 20%;
-    margin-right: 20%;
+.recipe {
+    display: flex;
+    justify-content: center;
+}
+
+.recipecard {
+    max-width: 1100px;
+    background-color: white;
+    padding: 2em;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: auto 1fr;
+}
+
+@media (max-width: 800px) {
+    .recipecard {
+        max-width: 1100px;
+        background-color: white;
+        padding: 2em;
+        display: block;
+        margin-left: 2em;
+        margin-right: 2em;
+    }
+}
+
+@media (max-width: 1150px) {
+    .recipecard {
+        margin-left: 2em;
+        margin-right: 2em;
+    }
+}
+
+.heading {
+    grid-column:1 /span 2;
+    display: flex;
+    justify-content: space-between;
+}
+
+.likebutton {
+    border: none;
+    background: transparent;
+    font-size: 32px;
+    transition: all 2s ease;
+}
+
+.likebutton:active {
+    transition: all 2s ease;
+
+}
+
+.instructions {
+    padding: 0 1em;
+}
+
+.ingredients {
+    list-style: none;
+    padding: 1em;
+}
+
+.ingredientitem {
+    padding-left: 2em;
 }

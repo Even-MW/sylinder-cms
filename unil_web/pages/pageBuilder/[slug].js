@@ -1,6 +1,6 @@
 import { PortableText, sanityClient, urlFor, usePreviewSubscription } from "../../lib/sanity"
 
-import Image from "next/image"
+import styles from "../../styles/PageBuilder.module.css"
 
 const pageBuilderQuery = `*[_type == "pageBuilder" && slug.current == $slug][0]{
     _id,
@@ -14,7 +14,8 @@ const pageBuilderQuery = `*[_type == "pageBuilder" && slug.current == $slug][0]{
             slug,
             title,
             recipeImage,
-            likes
+            likes,
+            timeEstiamte
         },
         articleList[]->{
             _id,
@@ -35,13 +36,13 @@ export default function PageBuilder({ data, preview }) {
     })
 
     return (
-        <article>
-            <img src={urlFor(page?.headerImage).url()} alt={page?.title} />
-            <h1>{page?.title}</h1>
-            <main>
+        <article className={styles.pagebuilder}>
+            <img src={urlFor(page?.headerImage).url()} alt={page?.title} className={styles.image} />
+            <main className={styles.main}>
+                <h1>{page?.title}</h1>
                 {page?.pageContent && <PortableText blocks={page.pageContent} />}
             </main>
-        </article>
+        </article >
     )
 
 

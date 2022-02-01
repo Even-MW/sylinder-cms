@@ -16,7 +16,8 @@
     "iframe-pane",
     "seo-pane",
     "media",
-    "asset-source-unsplash"
+    "asset-source-unsplash",
+    "content-calendar"
   ],
   "env": {
     "development": {

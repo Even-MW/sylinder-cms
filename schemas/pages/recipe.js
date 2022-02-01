@@ -1,4 +1,4 @@
-import { MdEmojiFoodBeverage, MdRule } from "react-icons/md"
+import { MdEmojiFoodBeverage, MdTapas } from "react-icons/md"
 
 export const recipe = {
     name: "recipe",
@@ -22,6 +22,11 @@ export const recipe = {
             },
         },
         {
+            name: "ingress",
+            type: "text",
+            title: "Ingress"
+        },
+        {
             name: "ingredients",
             title: "Ingredients",
             type: "array",
@@ -32,47 +37,44 @@ export const recipe = {
                         {
                             name: "ingredient",
                             title: "Ingredient",
-                            type: "reference",
-                            to: [{ type: "ingredient" }]
+                            type: "string",
                         },
                         {
                             name: "wholeNumber",
-                            title: "Whole Number",
+                            title: "Helt tall",
                             type: "number",
                         },
                         {
                             name: "fraction",
-                            title: "Fraction",
+                            title: "Decimal",
                             type: "string",
                             options: {
-                                list: ["1/2", "1/3", "1/4", "3/4", "2/3"]
+                                list: ["0,1", "0,2", "0,3", "0,4", "0,5", "0,6", "0,7", "0,8", "0,9"]
                             }
                         },
                         {
                             name: "unit",
-                            title: "Unit",
+                            title: "Enhet",
                             type: "string",
                             options: {
-                                list: ["gram", "kopp", "SS", "TS"]
+                                list: ["g", "ts", "ss", "dl", "l"]
                             }
                         }
                     ],
                     preview: {
                         select: {
-                            title: "ingredient.name",
-                            name: "ingredient.name",
-                            media: "ingredient.image",
+                            title: "ingredient",
                             wholeNumber: "wholeNumber",
                             fraction: "fraction",
                             unit: "unit"
                         },
                         prepare({
-                            title, subtitle, media, wholeNumber = "(No whole number set)", fraction = "(No fraction set)", unit = "(No unit set)"
+                            title, wholeNumber = "", fraction = "", unit = ""
                         }) {
                             return {
                                 title,
                                 subtitle: `${wholeNumber} ${fraction} ${unit}`,
-                                media
+                                media: MdTapas
                             }
                         }
                     }
@@ -110,10 +112,10 @@ export const recipe = {
             ],
             options: {
                 list: [
-                    { title: 'Under 20 minutter', value: 'under20min' },
-                    { title: '20-40 minutter', value: '20to40min' },
-                    { title: '40-60 minutter', value: '40to60min' },
-                    { title: 'Over 60 minutter ', value: 'over60min' }
+                    { title: 'Under 20 minutter', value: 'Under 20 minutter' },
+                    { title: '20-40 minutter', value: '20-40 minutter' },
+                    { title: '40-60 minutter', value: '40-60minutter' },
+                    { title: 'Over 60 minutter ', value: 'Over 60 minutter' }
                 ]
             }
         },

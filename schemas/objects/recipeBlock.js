@@ -34,6 +34,8 @@ export default {
     fields: [
         {
             name: "recipeList",
+            title: "Oppskrifts liste",
+            description: "Her kan du legge opp til 4 oppskrifter sammen",
             type: "array",
             validation: Rule => Rule.max(4),
             of: [

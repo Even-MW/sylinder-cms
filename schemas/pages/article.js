@@ -15,10 +15,16 @@ export const article = {
             name: 'slug',
             type: 'slug',
             title: 'Slug',
+            validation: Rule => Rule.required(),
             options: {
                 source: 'title',
                 maxLength: 96,
             },
+        },
+        {
+            name: "ingress",
+            title: "Ingress",
+            type: "text"
         },
         {
             name: "mainImage",
@@ -36,9 +42,11 @@ export const article = {
             type: "url"
         },
         {
-            name: "ingress",
-            title: "Ingress",
-            type: "text"
+            name: "publishedAt",
+            type: "datetime",
+            title: "Publisert",
+            validation: Rule => Rule.required(),
+            description: "Set til en fremtidig dato for å publisere på valgt dato"
         }
     ]
 }

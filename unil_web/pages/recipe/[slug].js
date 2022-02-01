@@ -19,9 +19,7 @@ const recipeQuery = `*[_type == "recipe" && slug.current == $slug][0]{
         unit,
         wholeNumber,
         fraction,
-        ingredient->{
-            name
-        }
+        ingredient
     },
     instructions,
     likes
@@ -48,32 +46,38 @@ export default function Recipe({ data, preview }) {
         setLikes(data.likes)
     }
 
+
     return (
-        <article className={styles.card}>
-            <h1>{recipe?.title}</h1>
-            <button onClick={addLike}>
-                {likes} 💛
-            </button>
-            <main>
-                <img className={styles.image} src={urlFor(recipe?.recipeImage).url()} />
+        <article className={styles.recipe}>
+            <main className={styles.recipecard}>
+                <heading className={styles.heading}>
+                    <h1>{recipe?.title}</h1>
+                    {/* <button id="button" onClick={addLike} className={styles.likebutton}>
+                        {likes} {likes !== 0 ? "🖤" : "💛"}
+                    </button> */}
+                </heading>
                 <div>
-                    <ul>
+                    <img className={styles.image} src={urlFor(recipe?.recipeImage).url()} />
+                    <ul className={styles.ingredients}>
+                        {recipe?.ingredients && <h3>Ingredienser</h3>}
                         {recipe?.ingredients?.map((ingredient) => (
-                            <li key={ingredient._key}>
+                            <li key={ingredient._key} className={styles.ingredientitem}>
                                 {ingredient?.wholeNumber}
                                 {ingredient?.fraction}
                                 {" "}
                                 {ingredient?.unit}
-                                <br />
-                                {ingredient?.ingredient.name}
+                                {" "}
+                                {ingredient?.ingredient}
                             </li>
                         ))}
                     </ul>
+                </div>
+                <div className={styles.instructions}>
                     {recipe?.instructions && <PortableText blocks={recipe?.instructions} />}
                 </div>
             </main>
 
-        </article>
+        </article >
     );
 }
 
