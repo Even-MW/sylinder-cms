@@ -37,8 +37,6 @@
 
 .heading {
     grid-column:1 /span 2;
-    display: flex;
-    justify-content: space-between;
 }
 
 .likebutton {

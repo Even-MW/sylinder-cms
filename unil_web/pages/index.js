@@ -3,8 +3,6 @@ import { PortableText, sanityClient, urlFor } from '../lib/sanity'
 // import BlockContent from "@sanity/block-content-to-react"
 import Head from 'next/head'
 import Link from "next/link"
-import YouTube from "react-youtube"
-import getYouTubeID from "get-youtube-id"
 import styles from '../styles/Home.module.css'
 
 const pageQuery = `*[_type == "pageBuilder"] {_id, title, slug}`

@@ -22,7 +22,8 @@ const recipeQuery = `*[_type == "recipe" && slug.current == $slug][0]{
         ingredient
     },
     instructions,
-    likes
+    likes,
+    ingress
 }`
 
 const path = "recipe"
@@ -52,6 +53,7 @@ export default function Recipe({ data, preview }) {
             <main className={styles.recipecard}>
                 <heading className={styles.heading}>
                     <h1>{recipe?.title}</h1>
+                    <p>{recipe?.ingress}</p>
                     {/* <button id="button" onClick={addLike} className={styles.likebutton}>
                         {likes} {likes !== 0 ? "🖤" : "💛"}
                     </button> */}

@@ -7,7 +7,7 @@
     max-width: 900px;
     background-color: white;
     padding: 2em;
-    transform: translateY(-10%);
+    margin-top: -2em;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
@@ -16,3 +16,4 @@
     width: 100%;
     object-fit: cover;
 }
+
