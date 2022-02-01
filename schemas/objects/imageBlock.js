@@ -5,7 +5,10 @@ export default {
         {
             name: "image",
             title: "Bilde",
-            type: "image"
+            type: "image",
+            options: {
+                hotspot: true
+            }
         },
         {
             name: "alt",

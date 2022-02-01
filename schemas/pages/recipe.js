@@ -91,7 +91,10 @@ export const recipe = {
         {
             name: "recipeImage",
             type: "image",
-            title: "Bilde"
+            title: "Bilde",
+            options: {
+                hotspot: true
+            }
         },
         {
             name: "videoUrl",
