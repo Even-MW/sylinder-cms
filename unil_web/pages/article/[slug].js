@@ -44,7 +44,7 @@ export default function Article({ data, preview }) {
             <img className={styles.image} src={urlFor(article?.mainImage?.image).url()} alt={article?.mainImage?.alt} />
             <main className={styles.main}>
                 <h1 className={styles.heading}>{article?.title}</h1>
-                {article.ingress && <p className={styles.ingress}>{article?.ingress}</p>}
+                {article?.ingress && <p className={styles.ingress}>{article?.ingress}</p>}
                 <br />
                 {article?.mainContent && <PortableText blocks={article?.mainContent} />}
                 {article?.youtubeurl && <YoutubeBlock url={article?.youtubeurl} />}
