@@ -17,7 +17,9 @@
     "seo-pane",
     "media",
     "asset-source-unsplash",
-    "content-calendar"
+    "content-calendar",
+    "@sanity/dashboard",
+    "dashboard-widget-document-list"
   ],
   "env": {
     "development": {
@@ -38,6 +40,10 @@
     {
       "implements": "part:@sanity/production-preview/resolve-production-url",
       "path": "./resolveProductionUrl.js"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "./dashboardConfig.js"
     }
   ]
 }

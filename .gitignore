@@ -4,3 +4,8 @@
 /web/.env.local
 /web_bak*
 .env.local
+dist/index.html
+dist/index.html
+dist/static/css/main.css
+dist/static/js/app.bundle.js
+dist/static/js/vendor.bundle.js
