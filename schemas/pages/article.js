@@ -47,6 +47,11 @@ export const article = {
             title: "Publisert",
             validation: Rule => Rule.required(),
             description: "Set til en fremtidig dato for å publisere på valgt dato"
-        }
+        },
+        // {
+        //     name: "owners",
+        //     type: "reference",
+        //     to: [{ type: "site" }]
+        // }
     ]
 }

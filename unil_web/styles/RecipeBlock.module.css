@@ -32,6 +32,11 @@
     width: 100%;
 }
 
+.link {
+    color: black !important;
+    text-decoration: none !important;
+}
+
 
 @media (min-width: 800px) { 
     .main {
@@ -70,5 +75,10 @@
     
     .time {
     
+    }
+
+    .link {
+        color: black;
+        text-decoration: none;
     }
 }

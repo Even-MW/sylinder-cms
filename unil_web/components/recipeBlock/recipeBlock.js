@@ -6,7 +6,7 @@ export default function RecipeBlock({ data }) {
         <article className={styles.main} style={{ "gridTemplateColumns": data.map(i => "1fr").join(" ") }}>
             {data.map(recipe => (
                 <section key={recipe._id} className={styles.card}>
-                    <a href={`/recipe/${recipe?.slug?.current}`}>
+                    <a href={`/recipe/${recipe?.slug?.current}`} className={styles.link}>
                         <img className={styles.image} src={urlFor(recipe?.recipeImage).url()} />
                         <div className={styles.text}>
                             <h1>{recipe.title}</h1>

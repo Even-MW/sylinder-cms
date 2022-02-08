@@ -48,8 +48,7 @@ export default {
     },
     {
       title: "Legg til bilde",
-      type: 'image',
-      options: { hotspot: true },
+      type: 'imageBlock',
     },
     {
       title: "Legg til Youtube video",

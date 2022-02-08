@@ -54,7 +54,7 @@ export default function Article({ data, preview }) {
 }
 
 export async function getStaticPaths() {
-    const allSlugsQuery = `[*[defined(slug.current)][].slug.current]`
+    const allSlugsQuery = `[_type == "article" && *[defined(slug.current)][].slug.current]`
     const pages = await sanityClient.fetch(allSlugsQuery)
 
     return {

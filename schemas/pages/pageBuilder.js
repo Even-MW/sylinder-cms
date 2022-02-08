@@ -29,6 +29,11 @@ export const pageBuilder = {
             },
         },
         {
+            name: "frontpage",
+            title: "Er forside",
+            type: "boolean"
+        },
+        {
             name: "pageContent",
             title: "Hovedinnhold",
             type: "blockContent"

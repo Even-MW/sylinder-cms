@@ -2,12 +2,16 @@ import { MdTapas, MdWeb } from 'react-icons/md'
 
 import Iframe from "sanity-plugin-iframe-pane";
 import S from '@sanity/desk-tool/structure-builder'
+import documentStore from 'part:@sanity/base/datastore/document'
+import { map } from 'rxjs/operators'
 import resolveProductionUrl from "./resolveProductionUrl";
 
 // We filter document types defined in structure to prevent
 // them from being listed twice
-const hiddenDocTypes = (listItem) =>
-    !["pageBuilder", "media.tag", "ingredient"].includes(listItem.getId());
+const hiddenDocTypes = (listItem) => {
+    console.log(listItem.spec.schemaType.fields)
+    return !["pageBuilder", "media.tag", "site", "ingredient"].includes(listItem.getId())
+};
 
 export const getDefaultDocumentNode = () => {
     // Return all documents with just 1 view: the form
@@ -21,27 +25,57 @@ export const getDefaultDocumentNode = () => {
             .title("Preview"),
     ])
 }
+
+const siteQuery = `*[_type == "site"]`
+
 export default () =>
-    S.list()
-        .title('Innhold')
-        .items(
-            [
-                S.listItem()
-                    .title('Sider')
-                    .icon(MdWeb)
-                    .child(
-                        S.documentTypeList('pageBuilder')
+    documentStore.listenQuery(siteQuery).pipe(
+        map((sites) =>
+            S.list()
+                .title('Innhold')
+                .items(
+                    [
+                        S.listItem()
                             .title('Sider')
-                    ),
-                S.divider(),
-                ...S.documentTypeListItems().filter(hiddenDocTypes),
-                S.divider(),
-                S.listItem()
-                    .title('Ingredienser')
-                    .icon(MdTapas)
-                    .child(
-                        S.documentTypeList('ingredient')
-                            .title('Ingredienser')
-                    ),
-            ]
-        )
+                            .icon(MdWeb)
+                            .child(
+                                S.documentTypeList('pageBuilder')
+                                    .title('Sider')
+                            ),
+                        S.divider(),
+                        ...S.documentTypeListItems().filter(hiddenDocTypes),
+                        // S.divider(),
+                        // S.listItem()
+                        //     .title('Ny side')
+                        //     .icon(MdWeb)
+                        //     .child(
+                        //         S.documentTypeList('site')
+                        //             .title('Ny side')
+                        //     ),
+                        // For every new site create a new list item with access to all listItems
+                        // ...sites.map((site) =>
+                        //     S.listItem()
+                        //         .title(site.name)
+                        //         .child((props) => {
+                        //             console.log(site._id)
+                        //             return S.documentTypeList('article')
+                        //                 .title('Artikkel')
+                        //                 .filter('_type == $type && $ref == owners._ref')
+                        //                 .params({ type: 'article', ref: site._id })
+                        //                 .initialValueTemplates(
+                        //                     [S.initialValueTemplateItem('article', { pageId: site._id })]
+                        //                 )
+                        //         }
+                        //             // S.list()
+                        //             //     .title(site.name)
+                        //             //     .items([
+                        //             //         ...S.documentTypeListItems()
+                        //             //             .filter(hiddenDocTypes,)
+                        //             //         // .filter('$pageId in owners[]._ref')
+                        //             //         // .params({ pageId }),
+                        //             //     ])
+                        //         )
+                        // )
+                    ]
+                )
+        ))

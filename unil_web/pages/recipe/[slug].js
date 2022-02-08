@@ -84,7 +84,7 @@ export default function Recipe({ data, preview }) {
 }
 
 export async function getStaticPaths() {
-    const allSlugsQuery = `[*[defined(slug.current)][].slug.current]`
+    const allSlugsQuery = `[_type == "recipe" && *[defined(slug.current)][].slug.current]`
     const pages = await sanityClient.fetch(allSlugsQuery)
 
     return {

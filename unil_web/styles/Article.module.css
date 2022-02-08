@@ -9,6 +9,12 @@
     padding: 2em;
     margin-top: -2em;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    
+}
+
+.main a {
+    color: #1a4d9e;
+    text-decoration: underline;
 }
 
 .image {
