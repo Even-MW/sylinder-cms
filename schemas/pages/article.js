@@ -48,10 +48,10 @@ export const article = {
             validation: Rule => Rule.required(),
             description: "Set til en fremtidig dato for å publisere på valgt dato"
         },
-        {
-            name: "owners",
-            type: "reference",
-            to: [{ type: "site" }]
-        }
+        // {
+        //     name: "owners",
+        //     type: "reference",
+        //     to: [{ type: "site" }]
+        // }
     ]
 }
