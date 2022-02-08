@@ -49,7 +49,7 @@ export default function PageBuilder({ data, preview }) {
 }
 
 export async function getStaticPaths() {
-    const allSlugsQuery = `[*[defined(slug.current)][].slug.current]`
+    const allSlugsQuery = `[_type == "pageBuilder" &&*[defined(slug.current)][].slug.current]`
     const pages = await sanityClient.fetch(allSlugsQuery)
 
     return {
