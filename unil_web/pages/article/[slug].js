@@ -68,5 +68,5 @@ export async function getStaticProps({ params }) {
 
     const article = await sanityClient.fetch(articleQuery, { slug })
 
-    return { props: { data: { article }, preview: true } }
+    return { props: { data: { article }, preview: true }, revalidate: 60 }
 }
