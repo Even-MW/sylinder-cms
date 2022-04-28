@@ -70,6 +70,7 @@ export async function getStaticProps() {
       pages,
       recipes,
       articles,
-    }
+    },
+    revalidate: 60,
   }
 }

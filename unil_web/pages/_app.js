@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
   return <>
     <Link href="/">
       <a>
-        <h1 className={styles.underline}>Editor experience</h1>
+        <h1 className={styles.underline}>Editor experience test</h1>
       </a>
     </Link>
     <Component {...pageProps} />
